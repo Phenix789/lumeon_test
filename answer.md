@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  * Check if the hospital repository return a non null value (no information from documentation, exception/null ?)
  * PSR-1 & PSR-2 : short array declaration, code style, ...
  * Use the `send()` method instead of `__toString()` from the response object
+   * After test, `return getHospitalPatients()` doesn't convert the response object to a string and sent it as response content. So, use `send()` method or at least `echo getHospitalPatients()`
  
 You can see changement into the file `web/showhospitalpatients.improved.php`
  
