@@ -27,6 +27,8 @@ class Patient
     /**
      * @var  \DateTime
      *
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      * @Assert\LessThan("today")
      */
     private $dob;
@@ -34,6 +36,8 @@ class Patient
     /**
      * @var  string
      *
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
      * @Assert\Choice({"m", "f"})
      */
     private $gender;

@@ -53,7 +53,7 @@ class DoctorController extends AbstractController
         $patient = new Patient();
         $form = $this->createForm(NewPatientType::class, $patient, ['method' => Request::METHOD_PUT]);
         $form->handleRequest($request);
-//var_dump($patient); exit();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $patient->setDoctor($doctor);
             $this->getPatientRepository()->save($patient);

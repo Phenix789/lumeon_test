@@ -24,14 +24,15 @@ class NewPatientType extends AbstractType
                 ChoiceType::class,
                 [
                     'choices' => [
-                        Gender::MALE   => Gender::MALE,
-                        Gender::FEMALE => Gender::FEMALE,
+                        Gender::MALE,
+                        Gender::FEMALE,
                     ],
+                    'choices_as_values' => true
                 ]
             );
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return '';
     }

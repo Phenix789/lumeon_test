@@ -7,7 +7,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class AbstractController extends Controller
+abstract class AbstractController extends Controller
 {
     /**
      * @return \AppBundle\Repository\DoctorRepository
@@ -53,7 +53,7 @@ class AbstractController extends Controller
      *
      * @return JsonResponse
      */
-    protected function createResponseNotFound($message)
+    protected function createResponseNotFound($message = 'Not Found')
     {
         return $this->createResponse(['msg' => $message], Response::HTTP_NOT_FOUND);
     }
@@ -68,7 +68,12 @@ class AbstractController extends Controller
         $errors = $form->getErrors(true);
         $payload = ['msg' => count($errors) . ' error(s) found'];
         foreach ($errors as $error) {
-            $payload['errors'][$error->getOrigin()->getName()] = $error->getMessage();
+            $name = $error->getOrigin() ? $error->getOrigin()->getName() : null;
+            if ($name) {
+                $payload['errors'][$name] = $error->getMessage();
+            } else {
+                $payload['errors'][] = $error->getMessage();
+            }
         }
 
         return $this->createResponse($payload, Response::HTTP_BAD_REQUEST);

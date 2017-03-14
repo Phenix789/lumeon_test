@@ -87,7 +87,7 @@ final class Fixture
         self::$patients[] = $patient;
     }
 
-    private function init()
+    private static function init()
     {
         if (null === self::$hospitals) {
             //Hospital

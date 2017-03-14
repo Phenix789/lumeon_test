@@ -47,7 +47,7 @@ class PatientRepository implements RepositoryInterface
     /**
      * @param Doctor $doctor
      *
-     * @return Patient|array
+     * @return Patient[]|array
      */
     public function selectByDoctor(Doctor $doctor)
     {
