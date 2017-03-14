@@ -10,6 +10,8 @@ use AppBundle\Fixture;
 class PatientRepository implements RepositoryInterface
 {
     /**
+     * @param int $id
+     *
      * @return Patient|null
      */
     public function selectById($id)

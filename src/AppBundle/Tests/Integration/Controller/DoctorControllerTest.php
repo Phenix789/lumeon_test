@@ -49,7 +49,6 @@ class DoctorControllerTest extends WebTestCase
      * @param $name
      * @param $dob
      * @param $gender
-     * @param $status
      * @param $errorKey
      *
      * @dataProvider dataNewPatientActionFail
