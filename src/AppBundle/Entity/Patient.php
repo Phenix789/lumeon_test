@@ -2,22 +2,63 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Patient
 {
     const GENDER_MALE   = 1;
     const GENDER_FEMALE = 2;
     const GENDER_OTHER  = 3;
 
-    /** @var  int */
+    /**
+     * @var  int
+     */
     private $id;
-    /** @var  string */
+
+    /**
+     * @var  string
+     *
+     * @Assert\NotNull()
+     * @Assert\NotBlank()
+     * @Assert\Length(max=255)
+     */
     private $name;
-    /** @var  \DateTime */
+
+    /**
+     * @var  \DateTime
+     *
+     * @Assert\LessThan("today")
+     */
     private $dob;
-    /** @var  string */
+
+    /**
+     * @var  string
+     *
+     * @Assert\Choice({"m", "f"})
+     */
     private $gender;
-    /** @var  Hospital */
-    private $hospital;
+
+    /**
+     * @var Doctor
+     */
+    private $doctor;
+
+    /**
+     * Patient constructor.
+     * @param int $id
+     * @param string $name
+     * @param \DateTime $dob
+     * @param string $gender
+     * @param Doctor $doctor
+     */
+    public function __construct($id = null, $name = null, $dob = null, $gender = null, $doctor = null)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->dob = $dob;
+        $this->gender = $gender;
+        $this->doctor = $doctor;
+    }
 
     /**
      * @return int
@@ -96,21 +137,29 @@ class Patient
     }
 
     /**
+     * @return Doctor
+     */
+    public function getDoctor()
+    {
+        return $this->doctor;
+    }
+
+    /**
+     * @param Doctor $doctor
+     * @return Patient
+     */
+    public function setDoctor($doctor)
+    {
+        $this->doctor = $doctor;
+
+        return $this;
+    }
+
+    /**
      * @return Hospital
      */
     public function getHospital()
     {
-        return $this->hospital;
-    }
-
-    /**
-     * @param Hospital $hospital
-     * @return Patient
-     */
-    public function setHospital($hospital)
-    {
-        $this->hospital = $hospital;
-
-        return $this;
+        return $this->doctor ? $this->doctor->getHospital() : null;
     }
 }

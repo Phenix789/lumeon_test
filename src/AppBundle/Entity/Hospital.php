@@ -4,9 +4,27 @@ namespace AppBundle\Entity;
 
 class Hospital
 {
+    /**
+     * @var int
+     */
     private $id;
 
+    /**
+     * @var string
+     */
     private $name;
+
+    /**
+     * Hospital constructor.
+     *
+     * @param int $id
+     * @param string $name
+     */
+    public function __construct($id = null, $name = null)
+    {
+        $this->id = $id;
+        $this->name = $name;
+    }
 
     /**
      * @return mixed
